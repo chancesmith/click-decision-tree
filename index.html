@@ -27,5 +27,27 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
+	<script>
+		var decisions = [];
+		$.getJSON( "./decisions.json")
+		.done(function( data ) {
+			var items = [];
+			decisions = data;
+			optionClicked(3);
+		})
+		.fail(function( jqxhr, textStatus, error ) {
+			var err = textStatus + ", " + error;
+			console.log( "Request Failed: " + err );
+		});
+
+		function optionClicked(id){
+
+			var results = $.grep(decisions, function(v) {
+				return v.parent == id;
+			});
+			console.log(results);
+
+		}
+	</script>
 </body>
 </html>
