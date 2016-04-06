@@ -48,6 +48,13 @@
 			console.log( "Request Failed: " + err );
 		});
 
+		// sentence parts data
+		var sentenceParts = [
+			"I&#39;m interested in",
+			"and want to know more about",
+			"especially"
+		];
+
 		// function used onClick of options in the decision tree
 		function optionBuild(id = null){
 
@@ -55,13 +62,6 @@
 			var results = $.grep(decisions, function(v) {
 				return v.parent == id;
 			});
-			
-			// sentence parts data
-			var sentenceParts = [
-				"I&#39;m interested in",
-				"and want to know more about",
-				"especially"
-			];
 
 			// push into items the options under parent
 			var items = [];
