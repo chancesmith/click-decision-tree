@@ -40,7 +40,7 @@ function optionBuild() {
 		if (obj.url === null) {
 			items.push("<li onClick='optionBuild(" + obj.id + ", \"" + obj.text + "\" );'><a>" + obj.text + "</a></li>");
 		} else {
-			items.push("<li onClick='optionBuild(" + obj.id + ", \"" + obj.text + "\" );'><a href='" + obj.url + "'>" + obj.text + "</a></li>");
+			items.push("<li><a href='" + obj.url + "'>" + obj.text + "</a></li>");
 		}
 	});
 
@@ -81,14 +81,14 @@ function updateLevel(num) {
 function checkLevels() {
 	switch (count) {
 		case 0:
-		$("#options-1, #options-2").remove();
-		break;
+			$("#options-1, #options-2").remove();
+			break;
 		case 1:
-		$("#options-1, #options-2").remove();
-		break;
+			$("#options-1, #options-2").remove();
+			break;
 		case 2:
-		$("#options-2").remove();
-		break;
+			$("#options-2").remove();
+			break;
 		default:
 		//nada
 	}

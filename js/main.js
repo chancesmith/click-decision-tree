@@ -41,7 +41,7 @@ function optionBuild(id = null, btnText = "pick one"){
 		if(obj.url === null){
 			items.push( "<li onClick='optionBuild(" + obj.id + ", \"" + obj.text + "\" );'><a>" + obj.text + "</a></li>" );
 		} else {
-			items.push( "<li onClick='optionBuild(" + obj.id + ", \"" + obj.text + "\" );'><a href='" + obj.url + "'>" + obj.text + "</a></li>" );
+			items.push( "<li><a href='" + obj.url + "'>" + obj.text + "</a></li>" );
 		}
 	});
 
