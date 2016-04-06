@@ -47,6 +47,17 @@
 			});
 			console.log(results);
 
+
+			$.each(results, function(idx, obj){ 
+				$.each(obj, function(key, value){
+					items.push( "<li id='" + key + "'>" + value + "</li>" );
+				});
+			});
+
+			$( "<ul/>", {
+				"class": "my-new-list",
+				html: items.join( "" )
+			}).appendTo( "body" );
 		}
 	</script>
 </body>
