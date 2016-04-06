@@ -21,11 +21,8 @@
 				
 			</div>
 
-			<div class="col-md-6">
-				<p><button data-jq-dropdown="#data" class="btn btn-primary">dropdown</button></p>
-				<div id="data" class="jq-dropdown">
+			<div id="decision-tree" class="col-md-6">
 					
-				</div>
 			</div>
 
 		</div>
@@ -65,12 +62,38 @@
 				}
 			});
 
-			$( "<ul/>", {
-				"id": "list",
-				"class": "jq-dropdown-menu",
-				"onChange": "optionClicked();",
-				html: items.join( "" )
-			}).appendTo( "#data" );
+			switch(count){
+				case 0:
+					$('<p>I&#39;m interested in <button data-jq-dropdown="#data" class="btn btn-primary">...</button></p><div id="data" class="jq-dropdown"></div>').appendTo('#decision-tree');
+					$( "<ul/>", {
+						"id": "list",
+						"class": "jq-dropdown-menu",
+						"onChange": "optionClicked();",
+						html: items.join( "" )
+					}).appendTo( "#data" );
+					break;
+				case 1:
+					$('<p>and want to know more about <button data-jq-dropdown="#data-1" class="btn btn-primary">...</button>,</p><div id="data-1" class="jq-dropdown"></div>').appendTo('#decision-tree');
+					$( "<ul/>", {
+						"id": "list",
+						"class": "jq-dropdown-menu",
+						"onChange": "optionClicked();",
+						html: items.join( "" )
+					}).appendTo( "#data-1" );
+					break;
+				case 2:
+					$('<p>especially <button data-jq-dropdown="#data-2" class="btn btn-primary">...</button></p><div id="data-2" class="jq-dropdown"></div>').appendTo('#decision-tree');
+					$( "<ul/>", {
+						"id": "list",
+						"class": "jq-dropdown-menu",
+						"onChange": "optionClicked();",
+						html: items.join( "" )
+					}).appendTo( "#data-2" );
+					break;
+				default:
+					//nothing -- done
+					break;
+			}
 			count++;
 		}
 
