@@ -52,6 +52,9 @@
 			var results = $.grep(decisions, function(v) {
 				return v.parent == id;
 			});
+			var parent = $.grep(decisions, function(v) {
+				return v.id == id;
+			});
 
 			var items = [];
 			$.each(results, function(idx, obj){

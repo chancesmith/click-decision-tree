@@ -11,7 +11,8 @@ End goal is to be able to make a madlib sentence, based on what is selected.
 
 ##Todo:
 - {X} make decision tree click to show children, then grand-children...
-- { } try jQuery Dropdown menu instead of select-options to make 'some' links to pages
-- { } build sentence version
+- {X} try jQuery Dropdown menu instead of select-options to make 'some' links to pages
+- {X} build sentence version
 - { } add data on left
-- { } format date
+- { } format data to show relationships of parent-child (Wordpress click&drag Appearance/Menus does this well)
+- { } be able to count levels of children (how deep does the radbit whole go?)
