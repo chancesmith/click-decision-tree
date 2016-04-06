@@ -33,25 +33,29 @@
 		.done(function( data ) {
 			var items = [];
 			decisions = data;
-			optionClicked(3);
+			optionClicked();
 		})
 		.fail(function( jqxhr, textStatus, error ) {
 			var err = textStatus + ", " + error;
 			console.log( "Request Failed: " + err );
 		});
 
-		function optionClicked(id){
+		function optionClicked(id = null){
 
 			var results = $.grep(decisions, function(v) {
 				return v.parent == id;
 			});
+			console.log(id);
 			console.log(results);
 
-
+			var items = [];
 			$.each(results, function(idx, obj){ 
-				$.each(obj, function(key, value){
-					items.push( "<li id='" + key + "'>" + value + "</li>" );
-				});
+				if(obj.url === null){
+					items.push( "<li id='" + obj.id + "' onclick='optionClicked(" + obj.id + ")'>" + obj.text + "</li>" );
+				} else {
+					items.push( "<li id='" + obj.id + "' onclick='optionClicked(" + obj.id + ")'><a href='" + obj.url + "''>" + obj.text + "</a></li>" );
+				}
+				
 			});
 
 			$( "<ul/>", {
