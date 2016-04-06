@@ -4,7 +4,12 @@ Reads JSON file (objects w/ parent-child relations) and displays list of options
 
 End goal is to be able to make a madlib sentence, based on what is selected.
 
-Todo:
+##Plugins:
+- jQuery
+- Bootstrap
+- [Bootstrap Dropdown](http://labs.abeautifulsite.net/jquery-dropdown/)
+
+##Todo:
 - {X} make decision tree click to show children, then grand-children...
 - { } try jQuery Dropdown menu instead of select-options to make 'some' links to pages
 - { } build sentence version
