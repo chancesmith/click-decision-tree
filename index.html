@@ -3,7 +3,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
 <body>
-	
+
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6">
@@ -29,18 +29,26 @@
 
 	<script>
 		var decisions = [];
+		var count = 0;
+
 		$.getJSON( "./decisions.json")
 		.done(function( data ) {
 			var items = [];
 			decisions = data;
-			optionClicked();
+			optionStart();
 		})
 		.fail(function( jqxhr, textStatus, error ) {
 			var err = textStatus + ", " + error;
 			console.log( "Request Failed: " + err );
 		});
+		
+		function optionClicked(){
+			var id = document.getElementById('list').value;
+			document.getElementById('list').remove();
+			optionStart(id);
+		}
 
-		function optionClicked(id = null){
+		function optionStart(id = null){
 
 			var results = $.grep(decisions, function(v) {
 				return v.parent == id;
@@ -48,21 +56,28 @@
 			console.log(id);
 			console.log(results);
 
-			var items = [];
-			$.each(results, function(idx, obj){ 
+			var items = ["<option>Select</option>"];
+			$.each(results, function(idx, obj){
 				if(obj.url === null){
-					items.push( "<li id='" + obj.id + "' onclick='optionClicked(" + obj.id + ")'>" + obj.text + "</li>" );
+					items.push( "<option value='" + obj.id + "'>" + obj.text + "</option>" );
 				} else {
-					items.push( "<li id='" + obj.id + "' onclick='optionClicked(" + obj.id + ")'><a href='" + obj.url + "''>" + obj.text + "</a></li>" );
+					items.push( "<option value='" + obj.id + "'><a href='" + obj.url + "''>" + obj.text + "</a></option>" );
 				}
-				
+
 			});
 
-			$( "<ul/>", {
-				"class": "my-new-list",
+			$( "<select/>", {
+				"id": "list",
+				"onChange": "optionClicked();",
 				html: items.join( "" )
 			}).appendTo( "body" );
+			count++;
 		}
+
+		$('.list').click(function() {
+			console.log($(this).val());
+		})
+
 	</script>
 </body>
 </html>
