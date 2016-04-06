@@ -16,25 +16,18 @@
 	</div>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-6">
-				<p><button data-jq-dropdown="#jq-dropdown-1">dropdown</button></p>
-				<div id="jq-dropdown-1" class="jq-dropdown">
-					<ul class="jq-dropdown-menu">
-						<li><a href="#1">Item 1</a></li>
-						<li><a href="#2">Item 2</a></li>
-						<li><a href="#3">Item 3</a></li>
-						<li class="jq-dropdown-divider"></li>
-						<li><a href="#4">Item 4</a></li>
-						<li><a href="#5">Item 5</a></li>
-						<li><a href="#5">Item 6</a></li>
-					</ul>
-				</div>
+			
+			<div id="data-output" class="col-md-6">
 				
+			</div>
 
+			<div class="col-md-6">
+				<p><button data-jq-dropdown="#data" class="btn btn-primary">dropdown</button></p>
+				<div id="data" class="jq-dropdown">
+					
+				</div>
 			</div>
-			<div id="data" class="col-md-6">
-				
-			</div>
+
 		</div>
 	</div>
 
@@ -44,43 +37,37 @@
 
 	<script>
 		var decisions = [];
+		var count = 0;
 
 		$.getJSON( "./decisions.json")
 		.done(function( data ) {
 			var items = [];
 			decisions = data;
-			optionStart();
+			optionBuild();
 		})
 		.fail(function( jqxhr, textStatus, error ) {
 			var err = textStatus + ", " + error;
 			console.log( "Request Failed: " + err );
 		});
-		
-		function optionClicked(){
-			var id = document.getElementById('list').value;
-			document.getElementById('list').remove();
-			optionStart(id);
-		}
 
-		function optionStart(id = null){
+		function optionBuild(id = null){
 
 			var results = $.grep(decisions, function(v) {
 				return v.parent == id;
 			});
-			console.log(id);
-			console.log(results);
 
-			var items = ["<option>Select</option>"];
+			var items = [];
 			$.each(results, function(idx, obj){
 				if(obj.url === null){
-					items.push( "<option value='" + obj.id + "'>" + obj.text + "</option>" );
+					items.push( "<li onClick='optionBuild(" + obj.id + ");'><a>" + obj.text + "</a></li>" );
 				} else {
-					items.push( "<option value='" + obj.id + "'>" + obj.text + "</option>" );
+					items.push( "<li onClick='optionBuild(" + obj.id + ");'><a href='" + obj.url + "'>" + obj.text + "</a></li>" );
 				}
 			});
 
-			$( "<select/>", {
+			$( "<ul/>", {
 				"id": "list",
+				"class": "jq-dropdown-menu",
 				"onChange": "optionClicked();",
 				html: items.join( "" )
 			}).appendTo( "#data" );
