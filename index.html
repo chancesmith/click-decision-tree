@@ -22,7 +22,7 @@
 			</div>
 
 			<div id="decision-tree" class="col-md-6">
-					
+
 			</div>
 
 		</div>
@@ -50,38 +50,48 @@
 
 		// sentence parts data
 		var sentenceParts = [
-			"I&#39;m interested in",
-			"and want to know more about",
-			"especially"
+		"I&#39;m interested in",
+		"and want to know more about",
+		"especially"
 		];
 
 		// function used onClick of options in the decision tree
-		function optionBuild(id = null){
+		function optionBuild(id = null, btnText = "pick one"){
+			// grab last count for #id's to show last option choosen
+			var lastCount = count - 1;
+			var lastButton = "#button-text-" + lastCount;
+			$( lastButton ).empty();
+			$( lastButton ).text( btnText );
 
 			// pull options data
-			var results = $.grep(decisions, function(v) {
+			var options = $.grep(decisions, function(v) {
 				return v.parent == id;
 			});
 
 			// push into items the options under parent
 			var items = [];
-			$.each(results, function(idx, obj){
+			$.each(options, function(idx, obj){
 				if(obj.url === null){
-					items.push( "<li onClick='optionBuild(" + obj.id + ");'><a>" + obj.text + "</a></li>" );
+					items.push( "<li onClick='optionBuild(" + obj.id + ", \"" + obj.text + "\" );'><a>" + obj.text + "</a></li>" );
 				} else {
-					items.push( "<li onClick='optionBuild(" + obj.id + ");'><a href='" + obj.url + "'>" + obj.text + "</a></li>" );
+					items.push( "<li onClick='optionBuild(" + obj.id + ", \"" + obj.text + "\" );'><a href='" + obj.url + "'>" + obj.text + "</a></li>" );
 				}
 			});
 
 			// force only showing 3 levels deep
 			if(count < 3){
-				// display sentence part
+
+				// grab count for #id's
 				var dataCount = "#data-" + count;
-				$('<p>'+sentenceParts[count]+' <button data-jq-dropdown="'+dataCount+'" class="btn btn-primary">...</button></p>')
-				// display options well
+
+				// display sentence part
+				$('<p>'+sentenceParts[count]+' <button id="button-text-'+count+'" data-jq-dropdown="'+dataCount+'" class="btn btn-primary">...</button></p>')
 				.appendTo('#decision-tree');
+
+				// display options well
 				$('<div id="data-'+count+'" class="jq-dropdown"></div>')
 				.appendTo('#decision-tree');
+
 				// display options in the well
 				$( "<ul/>", {
 					"id": "list",
