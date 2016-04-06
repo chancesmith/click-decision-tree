@@ -36,6 +36,7 @@
 		var decisions = [];
 		var count = 0;
 
+		// get data
 		$.getJSON( "./decisions.json")
 		.done(function( data ) {
 			var items = [];
@@ -47,19 +48,22 @@
 			console.log( "Request Failed: " + err );
 		});
 
+		// function used onClick of options in the decision tree
 		function optionBuild(id = null){
 
+			// pull options data
 			var results = $.grep(decisions, function(v) {
 				return v.parent == id;
 			});
 			
-			//sentence parts
+			// sentence parts data
 			var sentenceParts = [
 				"I&#39;m interested in",
 				"and want to know more about",
 				"especially"
 			];
 
+			// push into items the options under parent
 			var items = [];
 			$.each(results, function(idx, obj){
 				if(obj.url === null){
@@ -69,12 +73,16 @@
 				}
 			});
 
+			// force only showing 3 levels deep
 			if(count < 3){
+				// display sentence part
 				var dataCount = "#data-" + count;
 				$('<p>'+sentenceParts[count]+' <button data-jq-dropdown="'+dataCount+'" class="btn btn-primary">...</button></p>')
+				// display options well
 				.appendTo('#decision-tree');
 				$('<div id="data-'+count+'" class="jq-dropdown"></div>')
 				.appendTo('#decision-tree');
+				// display options in the well
 				$( "<ul/>", {
 					"id": "list",
 					"class": "jq-dropdown-menu",
@@ -84,10 +92,6 @@
 			}
 			count++;
 		}
-
-		$('.list').click(function() {
-			console.log($(this).val());
-		})
 
 	</script>
 </body>
