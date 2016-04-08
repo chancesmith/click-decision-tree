@@ -52,13 +52,16 @@ function optionBuild() {
 		var optionsCount = '#options-' + count;
 
 		// display options box
-		$('<div id="options-' + count + '"></div>').appendTo('#decision-tree');
+		$('<div id="options-' + count + '"></div>')
+		.appendTo('#decision-tree');
 
 		// display sentence part
-		$('<p>' + sentenceParts[count] + ' <button id="button-text-' + count + '" onClick="updateLevel(' + count + ')" data-jq-dropdown="' + dataCount + '" class="btn btn-primary">...</button></p>').appendTo(optionsCount);
+		$('<p>' + sentenceParts[count] + ' <button data-vertical-offset="-20" id="button-text-' + count + '" onClick="updateLevel(' + count + ')" data-jq-dropdown="' + dataCount + '" class="btn btn-primary">_________</button></p>')
+		.appendTo(optionsCount);
 
 		// display options well
-		$('<div id="data-' + count + '" class="jq-dropdown"></div>').appendTo(optionsCount);
+		$('<div id="data-' + count + '" class="jq-dropdown jq-dropdown-relative"></div>')
+		.appendTo(optionsCount);
 
 		// display options in the well
 		$("<ul/>", {

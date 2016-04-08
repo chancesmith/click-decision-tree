@@ -6,19 +6,19 @@
  *
  */
 .jq-dropdown {
-  // position: absolute;
-  z-index: 1039;
+  position: absolute;
+  z-index: 99999;
   display: none;
 }
 .jq-dropdown .jq-dropdown-menu,
 .jq-dropdown .jq-dropdown-panel {
   min-width: 160px;
   max-width: 100%;
-  width: 60%;
+  // width: 60%;
   list-style: none;
   background: white;
   border: solid 1px #ddd;
-  border-radius: 4px;
+  border-radius: 0px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   overflow: visible;
   padding: 4px 0;
